@@ -1,13 +1,13 @@
-# CLAUDE.md — Proyecto: dungeon crawler en primera persona (fork de Shattered Pixel Dungeon)
+# CLAUDE.md — Proyecto: dungeon crawler en primera persona (fork de Sprouted Pixel Dungeon)
 
 ## Contexto
 
-Fork de Shattered Pixel Dungeon (Java + libGDX, GPLv3) convertido a
+Fork de Sprouted Pixel Dungeon (Java + libGDX, GPLv3) convertido a
 **dungeon crawler en primera persona por turnos y en cuadrícula**, tipo
 Legend of Grimrock / Eye of the Beholder, con destino principal
 **Android / Google Play**.
 
-Las mecánicas de Shattered se conservan íntegras: turnos, cuadrícula,
+Las mecánicas de Sprouted se conservan íntegras: turnos, cuadrícula,
 identificación de pociones, maldiciones, jefes (Goo, Tengu, DM-300, Rey
 Enano, Yog-Dzewa). Lo único que cambia es la capa de presentación:
 de vista superior 2D a primera persona 3D.
@@ -20,7 +20,7 @@ público. No incorporar dependencias con licencias incompatibles
 arte que yo cree son míos y van con licencia aparte, indicada en el repo.
 
 Antes de distribuir: cambiar `appName`, ícono y pantalla de título para
-no confundirse con Shattered. Mantener los créditos a Watabou y a
+no confundirse con Sprouted. Mantener los créditos a Watabou y a
 Evan Debenham.
 
 ## Regla de arquitectura principal
@@ -52,8 +52,16 @@ Voy a iterar los números yo, a mano, con el teléfono. Tu trabajo es
 dejarme esos números expuestos y fáciles de cambiar.
 
 ### Fase 1 — Compilar el fork tal cual
-Clonar Shattered, compilarlo sin modificar, correrlo en Android.
+Clonar Sprouted, compilarlo sin modificar, correrlo en Android.
 Entender la estructura antes de tocar nada.
+
+**VERIFICAR EL MOTOR ANTES DE ASUMIR (crítico).** Sprouted está basado en
+una versión ANTIGUA de Shattered Pixel Dungeon, posiblemente ANTERIOR a la
+migración de Shattered a libGDX (~v0.7). Si Sprouted usa el motor viejo
+(SurfaceView/OpenGL propio, era Watabou), entonces el razonamiento de la
+Fase 2 ("reuso el 3D de libGDX") NO aplica tal cual. Al clonar, comprobar:
+¿hay dependencia de libGDX en el build (gradle)? ¿o es el engine viejo?
+Reportarlo antes de planear la Fase 2. No dar por hecho libGDX.
 
 ### Fase 2 — Capa de render 3D en libGDX
 libGDX ya trae API 3D, por eso el fork se queda en Java en vez de
